@@ -6,8 +6,8 @@
     <appender name="LogtailHttp" class="com.logtail.logback.LogtailAppender">
         <appName>MyApp</appName>
         <url>http://localhost:8099/producer-api/logs</url>
-        <mdcFields>requestId,requestTime,traceId,spanId,username</mdcFields>
-        <mdcTypes>string,int,string,string,string</mdcTypes>
+        <mdcFields>requestId,requestTime,traceId,spanId,username,req.remoteHost,req.queryString,req.requestURL</mdcFields>
+        <mdcTypes>string,int,string,string,string,string,string,string</mdcTypes>
     </appender>
 
     <appender name="Logtail" class="ch.qos.logback.classic.AsyncAppender">

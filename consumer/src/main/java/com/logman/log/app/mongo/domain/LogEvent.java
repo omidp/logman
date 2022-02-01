@@ -42,9 +42,15 @@ public class LogEvent implements Log {
 	
 	private String traceId;
 	
-	private String userId;
+//	private String userId;
+//	
+//	private String hostname;
+//	
+//	private String ip;
 	
 	private Date ts;
+	
+	private Date createdDate;
 	
 	Map<String, Object> meta = new HashMap<>();
 

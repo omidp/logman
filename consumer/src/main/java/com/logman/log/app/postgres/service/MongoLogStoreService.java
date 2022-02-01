@@ -1,6 +1,8 @@
 package com.logman.log.app.postgres.service;
 
 
+import java.util.Date;
+
 import org.springframework.messaging.MessageHeaders;
 import org.springframework.stereotype.Service;
 
@@ -40,13 +42,15 @@ public class MongoLogStoreService {
 		ee.setLine(event.getLine());
 		ee.setMethod(event.getMethod());
 		ee.setThreadName(event.getThreadName());
+		ee.setTs(event.getTs());
+		ee.setCreatedDate(new Date());
 		//
 		if(event.getMeta() != null)
 		{
 			ee.setTraceId(""+event.getMeta().get("traceId"));
 			ee.setSpanId(""+event.getMeta().get("spanId"));
 			ee.setLogger(""+event.getMeta().get("logger"));
-			ee.setUserId(""+event.getMeta().get("userId"));
+//			ee.setUserId(""+event.getMeta().get("userId"));
 			ee.setMeta(event.getMeta());
 		}
 		eventDao.save(ee).doOnSuccess((it) -> log.info("event saved {}", it.getId())).subscribe();

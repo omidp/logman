@@ -1,5 +1,6 @@
 package com.logman.log.producer;
 
+import java.util.Date;
 import java.util.UUID;
 
 import org.springframework.stereotype.Component;
@@ -13,7 +14,7 @@ public class LogMapper {
 		le.setId(UUID.randomUUID().toString());
 		le.setApp(event.getApp());
 		le.setLevel(event.getLevel());
-		le.setTs(DateUtil.toDate(event.getTs()));
+		le.setTs(new Date(Long.parseLong(event.getDt())));
 		//
 		if(event.getRuntime() != null)
 		{

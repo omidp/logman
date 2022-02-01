@@ -19,7 +19,10 @@ public class LogRequest implements Serializable {
 
 	private String message;
 	
-	private String ts;
+	/**
+	 * Date time
+	 */
+	private String dt;
 	
 	private String app;
 	

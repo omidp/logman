@@ -18,8 +18,13 @@ public class TestLogController {
 	public ResponseEntity<String> send()
 	{
 		log.info("This is a test log sending to kafka producer");
-		
 		return ResponseEntity.ok().build();
+	}
+	
+	@PostMapping("/ex")
+	public ResponseEntity<String> sendEx()
+	{
+		throw new AppException("APP EXCEPTION.....");
 	}
 	
 }

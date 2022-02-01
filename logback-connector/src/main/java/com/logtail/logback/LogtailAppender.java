@@ -182,7 +182,7 @@ public class LogtailAppender extends UnsynchronizedAppenderBase<ILoggingEvent> {
 		runtime.put("thread", event.getThreadName());
 
 		if (event.hasCallerData()) {
-			handleStackElemnt(event.getCallerData(), runtime);
+			handleStackElement(event.getCallerData(), runtime);
 		}
 		line.put("runtime", runtime);
 		//
@@ -193,7 +193,7 @@ public class LogtailAppender extends UnsynchronizedAppenderBase<ILoggingEvent> {
 				String className = tp.getClassName();
 				Throwable throwable = tp.getThrowable();
 				if (event.hasCallerData()) {
-					handleStackElemnt(throwable.getStackTrace(), runtime);
+					handleStackElement(throwable.getStackTrace(), runtime);
 				}
 				line.put("message", tp.getMessage());
 			}
@@ -205,7 +205,7 @@ public class LogtailAppender extends UnsynchronizedAppenderBase<ILoggingEvent> {
 		return lines;
 	}
 
-	private void handleStackElemnt(StackTraceElement[] stackTraceElements, Map<String, Object> runtime) {
+	private void handleStackElement(StackTraceElement[] stackTraceElements, Map<String, Object> runtime) {
 		StackTraceElement[] callerData = stackTraceElements;
 
 		if (callerData.length > 0) {

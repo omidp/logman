@@ -1,5 +1,6 @@
 package com.logman.log.app.mongo.domain;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -25,7 +26,6 @@ public class LogEvent implements Log {
 
 	private String level;
 
-
 	private String fileName;
 
 	private String method;
@@ -35,6 +35,16 @@ public class LogEvent implements Log {
 	private String threadName;
 
 	private String clzName;
+	
+	private String logger;
+	
+	private String spanId;
+	
+	private String traceId;
+	
+	private String userId;
+	
+	private Date ts;
 	
 	Map<String, Object> meta = new HashMap<>();
 

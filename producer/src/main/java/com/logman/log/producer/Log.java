@@ -1,7 +1,7 @@
 package com.logman.log.producer;
 
 import java.io.Serializable;
-import java.util.HashMap;
+import java.util.Date;
 import java.util.Map;
 
 public interface Log extends Serializable {
@@ -25,6 +25,8 @@ public interface Log extends Serializable {
 	String getThreadName();
 	
 	String getClzName();
+	
+	Date getTs();
 	
 	
 	

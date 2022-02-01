@@ -11,6 +11,7 @@ import org.springframework.stereotype.Component;
 import com.logman.log.app.exception.ConsumerExcpetion;
 import com.logman.log.app.model.event.LogModel;
 import com.logman.log.app.postgres.service.LogStoreService;
+import com.logman.log.app.postgres.service.MongoLogStoreService;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -23,10 +24,11 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class LogEventConsumer {
 
-	private LogStoreService eventService;
+//	private LogStoreService eventService;
+	private MongoLogStoreService eventService;
 	private List<PayloadReader> readers;
 
-	public LogEventConsumer(LogStoreService eventService, List<PayloadReader> readers) {
+	public LogEventConsumer(MongoLogStoreService eventService, List<PayloadReader> readers) {
 		this.eventService = eventService;
 		this.readers = readers;
 	}

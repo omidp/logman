@@ -3,6 +3,7 @@ package com.logman.log.app.config;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -24,6 +25,7 @@ import io.r2dbc.spi.ConnectionFactory;
 @Configuration
 @EntityScan(basePackageClasses = LogEvent.class)
 @EnableR2dbcRepositories(basePackageClasses = PostgresLogEventCrudRepository.class)
+@ConditionalOnProperty(prefix = LogmanConsumerConfiguration.PREFIX + ".postgres", name = "enabled", havingValue = "true")
 public class PostgresReactiveApplication {
 
 	@Bean

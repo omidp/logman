@@ -1,5 +1,6 @@
 package com.logman.log.app.model.event;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -34,6 +35,10 @@ public class LogModel implements Log {
 	private String threadName;
 
 	private String clzName;
+	
+	private String logger;
+	
+	private Date ts;
 	
 	Map<String, Object> meta = new HashMap<>();
 

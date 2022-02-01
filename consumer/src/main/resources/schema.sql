@@ -3,6 +3,8 @@
 CREATE TABLE IF NOT EXISTS log_event (
     log_event_id SERIAL PRIMARY KEY,
     id character varying(255),
+    created_date timestamp,
+    ts timestamp,
     message TEXT NOT NULL,
     app character varying(255),
     level character varying(255),

@@ -45,5 +45,9 @@ management:
     web:
       base-path: /
       
-      
+logman:
+  postgres:
+    enabled: false    
+  mongo:
+    enabled: true    
       

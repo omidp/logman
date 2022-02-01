@@ -1,5 +1,6 @@
 package com.logman.log.app.postgres.domain;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -42,6 +43,8 @@ public class LogEvent implements Log {
 	private String userId;
 	
 	private String logger;
+	
+	private Date ts;
 
 	private Map<String, Object> meta = new HashMap<>();
 

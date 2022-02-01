@@ -1,5 +1,6 @@
 package com.logman.log.producer;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -31,5 +32,7 @@ public class LogEvent implements Log {
 	private String threadName;
 	
 	private String clzName;
+	
+	private Date ts;
 
 }

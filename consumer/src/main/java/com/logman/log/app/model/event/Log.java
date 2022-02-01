@@ -1,6 +1,7 @@
 package com.logman.log.app.model.event;
 
 import java.io.Serializable;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -13,6 +14,8 @@ public interface Log extends Serializable {
 	String getApp();
 
 	String getLevel();
+	
+	String getLogger();
 
 	Map<String, Object> getMeta();
 
@@ -25,4 +28,6 @@ public interface Log extends Serializable {
 	String getThreadName();
 
 	String getClzName();
+	
+	Date getTs();
 }

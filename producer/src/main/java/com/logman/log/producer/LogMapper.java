@@ -13,6 +13,7 @@ public class LogMapper {
 		le.setId(UUID.randomUUID().toString());
 		le.setApp(event.getApp());
 		le.setLevel(event.getLevel());
+		le.setTs(DateUtil.toDate(event.getTs()));
 		//
 		if(event.getRuntime() != null)
 		{

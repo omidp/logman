@@ -43,6 +43,7 @@ public class LogStoreService {
 			ee.setTraceId(""+event.getMeta().get("traceId"));
 			ee.setSpanId(""+event.getMeta().get("spanId"));
 			ee.setLogger(""+event.getMeta().get("logger"));
+			ee.setUserId(""+event.getMeta().get("userId"));
 			ee.setMeta(event.getMeta());
 		}
 		eventDao.save(ee).doOnSuccess((it) -> log.info("event saved {}", it.getId())).subscribe();

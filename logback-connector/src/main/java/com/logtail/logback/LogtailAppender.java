@@ -263,7 +263,7 @@ public class LogtailAppender extends UnsynchronizedAppenderBase<ILoggingEvent> {
      *            MDC fields types
      */
     public void setMdcTypes(String mdcTypes) {
-        this.mdcTypes = Arrays.asList(mdcTypes.split(","));
+        this.mdcTypes = Arrays.stream(mdcTypes.split(",")).map(String::trim).collect(Collectors.toList());
     }
 
     /**

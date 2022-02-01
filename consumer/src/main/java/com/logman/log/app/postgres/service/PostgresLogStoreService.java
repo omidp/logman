@@ -1,17 +1,18 @@
 package com.logman.log.app.postgres.service;
 
-
 import java.util.Date;
 import java.util.Map;
 
 import org.springframework.messaging.MessageHeaders;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.logman.log.app.model.event.Log;
-import com.logman.log.app.mongo.dao.MongoLogEventCrudRepository;
-import com.logman.log.app.mongo.domain.LogEvent;
+import com.logman.log.app.postgres.dao.PostgresLogEventCrudRepository;
+import com.logman.log.app.postgres.domain.LogEvent;
 
 import lombok.extern.slf4j.Slf4j;
+import reactor.core.Disposable;
 import reactor.core.publisher.Mono;
 
 /**
@@ -20,17 +21,13 @@ import reactor.core.publisher.Mono;
  */
 @Service
 @Slf4j
-public class MongoLogStoreService implements LogStoreService{
+public class PostgresLogStoreService implements LogStoreService{
 
-	MongoLogEventCrudRepository eventDao;
+	PostgresLogEventCrudRepository eventDao;
 
-	
-
-	public MongoLogStoreService(MongoLogEventCrudRepository eventDao) {
+	public PostgresLogStoreService(PostgresLogEventCrudRepository eventDao) {
 		this.eventDao = eventDao;
 	}
-
-
 
 	public Mono<Void> save(Log event, Map<String, Object> headers) {
 		LogEvent ee = new LogEvent();
@@ -43,26 +40,23 @@ public class MongoLogStoreService implements LogStoreService{
 		ee.setLine(event.getLine());
 		ee.setMethod(event.getMethod());
 		ee.setThreadName(event.getThreadName());
-		ee.setTs(event.getTs());
 		ee.setCreatedDate(new Date());
+		ee.setTs(event.getTs());
 		//
 		if(event.getMeta() != null)
 		{
 			ee.setTraceId(""+event.getMeta().get("traceId"));
 			ee.setSpanId(""+event.getMeta().get("spanId"));
 			ee.setLogger(""+event.getMeta().get("logger"));
-//			ee.setUserId(""+event.getMeta().get("userId"));
 			ee.setMeta(event.getMeta());
 		}
 		eventDao.save(ee).doOnSuccess((it) -> log.info("event saved {}", it.getId())).subscribe();
 		return Mono.empty();
 	}
 
-
-
 	@Override
 	public LogStoreType type() {
-		return LogStoreType.MONGO;
+		return LogStoreType.POSTGRES;
 	}
 
 }

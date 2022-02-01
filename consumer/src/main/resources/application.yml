@@ -47,7 +47,8 @@ management:
       
 logman:
   postgres:
-    enabled: false    
-  mongo:
     enabled: true    
+  mongo:
+    enabled: false   
+  type: POSTGRES    
       

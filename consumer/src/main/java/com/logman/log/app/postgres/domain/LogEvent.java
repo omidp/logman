@@ -40,11 +40,11 @@ public class LogEvent implements Log {
 	
 	private String spanId;
 	
-	private String userId;
-	
 	private String logger;
 	
 	private Date ts;
+	
+	private Date createdDate;
 
 	private Map<String, Object> meta = new HashMap<>();
 

@@ -8,10 +8,10 @@ import org.springframework.messaging.Message;
 import org.springframework.messaging.MessageHeaders;
 import org.springframework.stereotype.Component;
 
+import com.logman.log.app.config.LogmanConsumerConfiguration;
 import com.logman.log.app.exception.ConsumerExcpetion;
 import com.logman.log.app.model.event.LogModel;
-import com.logman.log.app.postgres.service.LogStoreService;
-import com.logman.log.app.postgres.service.MongoLogStoreService;
+import com.logman.log.app.postgres.service.LogStoreServiceFactory;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -24,13 +24,15 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class LogEventConsumer {
 
-//	private LogStoreService eventService;
-	private MongoLogStoreService eventService;
+	private LogStoreServiceFactory logStoreServiceFactory;
 	private List<PayloadReader> readers;
+	private LogmanConsumerConfiguration config;
 
-	public LogEventConsumer(MongoLogStoreService eventService, List<PayloadReader> readers) {
-		this.eventService = eventService;
+	public LogEventConsumer(LogStoreServiceFactory logStoreServiceFactory, List<PayloadReader> readers,
+			LogmanConsumerConfiguration config) {
+		this.logStoreServiceFactory = logStoreServiceFactory;
 		this.readers = readers;
+		this.config = config;
 	}
 
 	@StreamListener(LogEventDataInput.INPUT)
@@ -43,7 +45,7 @@ public class LogEventConsumer {
 				.orElseThrow(() -> new ConsumerExcpetion("no reader found for " + contentType));
 		LogModel event = c.read(payload);
 		log.info("eventmodel {}", event.toString());
-		eventService.save(event, headers);
+		logStoreServiceFactory.getInstance(config.getType()).save(event, headers);
 	}
 
 }

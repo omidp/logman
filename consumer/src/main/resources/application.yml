@@ -1,0 +1,49 @@
+server:
+  port: 8072
+
+spring:
+  application:
+    name:  consumer-api
+  webflux:
+    base-path: /consumer-api
+  data:
+    mongodb:
+      #auto-index-creation: false
+      port: 27017
+      host: 127.0.0.1  
+      database: logdb
+  cloud:
+    stream:
+      bindings:
+        iot-data:
+          destination: log-data
+          group: output-group-1
+          content-type: application/json
+
+      kafka:
+        binder:
+          brokers:
+          - localhost:9092
+  r2dbc:
+    url: r2dbc:postgresql://localhost:5432/logdb
+    username: log
+    password: log
+
+#  kafka:
+#    consumer:
+#      key-deserializer: org.apache.kafka.common.serialization.LongDeserializer
+#      value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+        
+                    
+logging:
+  level:
+    root: INFO   
+  
+
+management:
+  endpoints:
+    web:
+      base-path: /
+      
+      
+      

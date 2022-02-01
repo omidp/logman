@@ -20,7 +20,7 @@ spring:
           producer-properties:
             client.id: producer-api
             key.serializer: org.apache.kafka.common.serialization.StringSerializer
-            value.serializer: org.apache.kafka.common.serialization.StringSerializer
+#            value.serializer: org.apache.kafka.common.serialization.StringSerializer
 logging:
   level:
     root: INFO

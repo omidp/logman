@@ -34,8 +34,8 @@ public class LogController {
 	@ResponseStatus(HttpStatus.ACCEPTED)
 	@PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
 	public Mono<Void> produceEvents(
-			@RequestBody List<@Valid LogRequest> request) {
-		logService.processAllEvents(request)
+			@RequestBody  List<@Valid LogRequest> request) {
+		logService.processLogs(request)
 				.doOnSubscribe(subscription -> LOG.info("==== Received request -> {}", request)).subscribe(null,
 						throwable -> LOG.error("=== Failed to process request " + request, throwable),
 						() -> LOG.info("===== Process Ended for request -> {}", request));
